@@ -28,30 +28,27 @@ function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
 
-    async function handleSubmit(e) {
-        e.preventDefault()
+   async function handleSubmit(e) {
+    e.preventDefault();
 
+    try {
+        const response = await api.post('/login', {
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+        });
 
-        try {
-            const { data: token } = await api.post('/login', {
-                email: emailRef.current.value,
-                password: passwordRef.current.value
+       
+        const token = response.data.token;
 
-            })
+       
+        localStorage.setItem("token", token);
 
+        navigate("/Produto");
 
-
-             localStorage.setItem("token", token)); 
-
-            
-            navigate("/Produto")
-        } catch (err) {
-
-            alert('Senha ou Email Incorretos')
-        }
-
-
+    } catch (err) {
+        alert("Senha ou Email Incorretos");
     }
+}
 
 
 
