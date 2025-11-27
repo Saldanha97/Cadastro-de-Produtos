@@ -41,7 +41,9 @@ function Login() {
 
 
 
-              localStorage.setItem("token", response.data); 
+             localStorage.setItem("token", token)); 
+
+            
             navigate("/Produto")
         } catch (err) {
 
