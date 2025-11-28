@@ -1,3 +1,4 @@
+
 import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../../../../services/api.js";
@@ -28,26 +29,27 @@ function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
 
-   async function handleSubmit(e) {
-    e.preventDefault();
+    async function handleSubmit(e) {
+        e.preventDefault();
 
-    try {
-        const response = await api.post('/login', {
-            email: emailRef.current.value,
-            password: passwordRef.current.value
-        });
+        try {
+            const response = await api.post('/login', {
+                email: emailRef.current.value,
+                password: passwordRef.current.value
+            });
 
-       
-        const token = response.data.accessToken;
-         localStorage.setItem("token", token);
-        
+            
+          
 
-        navigate("/Produto");
+            
+            const token = response.data.token; 
+            localStorage.setItem("token", token);
 
-    } catch (err) {
-        alert("Senha ou Email Incorretos");
+            navigate("/Produto");
+        } catch (err) {
+            alert("Senha ou Email Incorretos");
+        }
     }
-}
 
 
 
@@ -88,4 +90,3 @@ function Login() {
 
 
 export default Login
-
