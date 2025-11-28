@@ -1,8 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const api = axios.create({
-    baseURL:"http://localhost:3000"
-})
-
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}` // ou onde estiver guardando o token
+  }
+});
 
 export default api
