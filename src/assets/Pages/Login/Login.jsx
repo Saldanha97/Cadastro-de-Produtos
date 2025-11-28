@@ -38,10 +38,9 @@ function Login() {
         });
 
        
-        const token = response.data.token;
-
-       
-        localStorage.setItem("token", token);
+        const token = response.data.accessToken;
+         localStorage.setItem("token", token);
+          console.log("Token salvo:", localStorage.getItem("token"));
 
         navigate("/Produto");
 
