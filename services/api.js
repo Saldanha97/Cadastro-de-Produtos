@@ -8,7 +8,7 @@ const api = axios.create({
 
 
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token'); // pega o token salvo no login
+  const token = localStorage.setItem("token", token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
