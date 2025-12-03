@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../../services/api";
 import { useNavigate } from "react-router-dom";
+import { MdDeleteForever , MdExposurePlus1 ,MdExposureNeg1   } from "react-icons/md";
 
 function Produtos() {
 
@@ -36,10 +37,11 @@ function Produtos() {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setNome('');
-            setQuantidade(0);
+            setQuantidade(1);
             buscarProdutos();
         } catch (err) {
             console.error(err);
+            alert("Erro ao cadastrar produto, produto existente.");
         }
     };
 
@@ -95,11 +97,12 @@ function Produtos() {
                         className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                     <input
-                        type="number"
+                        type="number" 
                         placeholder="Quantidade"
-                        value={quantidade}
+                        value={quantidade} min={0}
                         onChange={(e) => setQuantidade(Number(e.target.value))}
                         className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        
                     />
                     <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
                         Cadastrar
@@ -116,21 +119,22 @@ function Produtos() {
                             <div className="flex gap-2">
                                 <button
                                     onClick={() => atualizarQuantidade(p.id, p.quantidade + 1)}
-                                    className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                                    className="bg-green-500 text-white px-2 py-1 rounded  hover:bg-green-600"
                                 >
-                                    +
+                                 <MdExposurePlus1 />
+
                                 </button>
                                 <button
                                     onClick={() => atualizarQuantidade(p.id, p.quantidade - 1)}
                                     className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
                                 >
-                                    -
+                                   <MdExposureNeg1 />
                                 </button>
                                 <button
                                     onClick={() => excluirProduto(p.id)}
                                     className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                                 >
-                                    X
+                                   <MdDeleteForever />
                                 </button>
                             </div>
                         </li>

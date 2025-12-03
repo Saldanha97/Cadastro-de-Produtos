@@ -44,6 +44,7 @@ function Login() {
 
             const token = response.data.token;
             localStorage.setItem("token", token);
+            
 
             navigate("/Produto");
         } catch (err) {
